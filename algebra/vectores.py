@@ -1,12 +1,20 @@
 """
     Tercera tarea de APA - manejo de vectores
 
-    Nombre y apellidos:
+    Nombre y apellidos: Víctor Pallàs i Pol Raich
 """
 
+import numpy as np
 class Vector:
     """
     Clase usada para trabajar con vectores sencillos
+    
+    >>> v1 = Vector([1, 2, 3])
+    >>> v2 = Vector([4, 5, 6])
+    >>> v1 * v2
+    Vector([4, 10, 18])
+    >>> v1 @ v2
+    32
     """
     def __init__(self, iterable):
         """
@@ -84,4 +92,49 @@ class Vector:
         """
 
         return -self + other
+    
+    def __mul__(self, other):
+        """
+        Multiplica al vector otro vector o una constante.
+        """
+        
+        if isinstance(other, (int, float, complex)):
+            return Vector([uno * other for uno in self])
+        else: 
+            return Vector([uno * otro for uno, otro in zip(self, other)])
+        
+    __rmul__ = __mul__
+    
+    def __matmul__(self, other):
+        """
+        Producto escalar de dos vectores
+        """
+        
+        return sum(self * other)
+    
+    __rmatmul__ = __matmul__
+    
+    # Falta acabar el modul del vector2 ja que fent-ho amb numpy retorna un array
+    def __floordiv__(self, other):
+        """
+        Componente tangencial de un vector
+        """
+        
+        return (self @ other / np.linalg.norm(other) ** 2) * other
+    
+    __rfloordiv__ = __floordiv__
+    
+    # Retorna Arrey per la funcio de abans
+    def __mod__(self, other):
+        """
+        Componente perpendicular de un vector
+        """
+        
+        return self.vector - (self // other)
+    
+    __rmod__ = __mod__
 
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose = True)
