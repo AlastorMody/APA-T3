@@ -1,6 +1,6 @@
 # Tercera tarea de APA: Multiplicaciones de vectores y ortogonalidad
 
-## Nom i cognoms: 
+## Nom i cognoms: Víctor Pallàs i Pol Raich
 
 El fichero `algebra/vectores.py` incluye la definición de la clase `Vector` con los
 métodos desarrollados en clase, que incluyen la construcción, representación y
@@ -80,9 +80,7 @@ resultado de la ejecución de los tests unitarios.
 
 #### Código desarrollado
 
-Inserte a continuación el código de los métodos desarrollados en esta tarea, usando los
-comandos necesarios para que se realice el realce sintáctico en Python del mismo (no
-vale insertar una imagen o una captura de pantalla, debe hacerse en formato *markdown*).
+Inserte a continuación el código de los métodos desarrollados en esta tarea, usando los comandos necesarios para que se realice el realce sintáctico en Python del mismo (no vale insertar una imagen o una captura de pantalla, debe hacerse en formato *markdown*).
 
 ```python
     def __mul__(self, other):
