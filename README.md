@@ -1,6 +1,6 @@
 # Tercera tarea de APA: Multiplicaciones de vectores y ortogonalidad
 
-## Nom i cognoms
+## Nom i cognoms: 
 
 El fichero `algebra/vectores.py` incluye la definición de la clase `Vector` con los
 métodos desarrollados en clase, que incluyen la construcción, representación y
@@ -76,11 +76,75 @@ Inserte a continuación una captura de pantalla que muestre el resultado de ejec
 fichero `algebra/vectores.py` con la opción *verbosa*, de manera que se muestre el
 resultado de la ejecución de los tests unitarios.
 
+![](algebra/img/Test_Units_1.png)
+
 #### Código desarrollado
 
 Inserte a continuación el código de los métodos desarrollados en esta tarea, usando los
 comandos necesarios para que se realice el realce sintáctico en Python del mismo (no
 vale insertar una imagen o una captura de pantalla, debe hacerse en formato *markdown*).
+
+```python
+    def __mul__(self, other):
+        """
+        Multiplica al vector otro vector o una constante.
+        
+        >>> Vector([1, 2, 3]) * Vector([4, 5, 6])
+        Vector([4, 10, 18])
+        """
+        
+        if isinstance(other, (int, float, complex)):
+            return Vector([uno * other for uno in self])
+        else: 
+            return Vector([uno * otro for uno, otro in zip(self, other)])
+        
+    __rmul__ = __mul__
+    
+    def __matmul__(self, other):
+        """
+        Producto escalar de dos vectores
+        
+        >>> Vector([1, 2, 3]) @ Vector([4, 5, 6])
+        32
+        """
+        
+        return sum(self * other)
+    
+    __rmatmul__ = __matmul__
+    
+    def __floordiv__(self, other):
+        """
+        Componente tangencial de un vector
+        
+        >>> Vector([2, 1, 2]) // Vector([0.5, 1, 0.5])
+        Vector([1.0, 2.0, 1.0])
+        """
+        suma = 0
+        
+        for prova in other:
+            suma += prova**2
+            
+        return (self @ other) / (suma) * other
+    
+    __rfloordiv__ = __floordiv__
+    
+    def __mod__(self, other):
+        """
+        Componente perpendicular de un vector
+        
+        >>> Vector([2, 1, 2]) % Vector([0.5, 1, 0.5])
+        Vector([1.0, -1.0, 1.0])
+        """
+        
+        return self.vector - (self // other)
+    
+    __rmod__ = __mod__
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose = True)
+```
 
 #### Subida del resultado al repositorio GitHub y *pull-request*
 
