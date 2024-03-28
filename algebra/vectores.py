@@ -41,7 +41,7 @@ class Vector:
 
     def __setitem__(self, key, value):
         """
-        Fija el valor de una componente o loncha del vector.
+        Asigna el valor de una componente o loncha del vector.
         """
 
         self.vector[key] = value
